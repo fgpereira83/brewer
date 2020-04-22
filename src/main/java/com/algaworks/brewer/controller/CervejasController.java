@@ -18,18 +18,18 @@ public class CervejasController {
 	public String novo(Cerveja cerveja) {
 		return "cerveja/CadastroCerveja";
 	}
-	
-	@RequestMapping(value="/cervejas/novo", method = RequestMethod.POST)
-	public String cadastrar(@Valid Cerveja cerveja,BindingResult result, Model model, RedirectAttributes attributes) {
-		
-		if(result.hasErrors()) {
+
+	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
+	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
+
+		if (result.hasErrors()) {
 			return novo(cerveja);
 		}
-		
-		//salvar no bd
-		
-		attributes.addFlashAttribute("mensagem","Cerveja salva com sucesso!");
+
+		// salvar no bd
+
+		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
 		return "redirect:/cervejas/novo";
 	}
-	
+
 }

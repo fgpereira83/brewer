@@ -39,4 +39,8 @@ public class Cerveja {
 		this.nome = nome;
 	}
 
+	@Override
+	public String toString() {
+		return "sku:" + sku + " - nome: "+nome;
+	}
 }
