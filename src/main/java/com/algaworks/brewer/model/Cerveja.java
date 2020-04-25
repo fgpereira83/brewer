@@ -24,7 +24,6 @@ public class Cerveja {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-
 	@NotBlank(message = "SKU é obrigatório")
 	private String sku;
 
@@ -37,7 +36,8 @@ public class Cerveja {
 	private BigDecimal valor;
 
 	@Column(name = "teor_alcoolico")
-	private BigDecimal teorAcoolico;
+	private BigDecimal teorAlcoolico;
+
 
 	private BigDecimal comissao;
 
@@ -53,6 +53,8 @@ public class Cerveja {
 	@ManyToOne
 	@JoinColumn(name = "codigo_estilo")
 	private Estilo estilo;
+	
+	
 
 	public Long getCodigo() {
 		return codigo;
@@ -70,13 +72,14 @@ public class Cerveja {
 		this.valor = valor;
 	}
 
-	public BigDecimal getTeorAcoolico() {
-		return teorAcoolico;
+	public BigDecimal getTeorAlcoolico() {
+		return teorAlcoolico;
+	}
+	
+	public void setTeorAlcoolico(BigDecimal teorAlcoolico) {
+		this.teorAlcoolico = teorAlcoolico;
 	}
 
-	public void setTeorAcoolico(BigDecimal teorAcoolico) {
-		this.teorAcoolico = teorAcoolico;
-	}
 
 	public BigDecimal getComissao() {
 		return comissao;
@@ -146,8 +149,7 @@ public class Cerveja {
 	public String toString() {
 		return "sku:" + sku + " - nome: " + nome;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -155,7 +157,7 @@ public class Cerveja {
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
