@@ -15,8 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.algaworks.brewer.model.Cerveja;
-
-import repository.Cervejas;
+import com.algaworks.brewer.repository.Cervejas;
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses = Cervejas.class)
