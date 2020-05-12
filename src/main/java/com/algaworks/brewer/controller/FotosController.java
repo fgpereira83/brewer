@@ -1,6 +1,8 @@
 package com.algaworks.brewer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,18 +17,23 @@ import com.algaworks.brewer.storage.FotoStorageRunnable;
 @RestController
 @RequestMapping("/fotos")
 public class FotosController {
-	
+
 	@Autowired
 	private FotoStorage fotoStorage;
-	
 
 	@PostMapping
 	public DeferredResult<FotoDTO> upload(@RequestParam("files[]") MultipartFile[] files) {
-		DeferredResult<FotoDTO> resultado =  new DeferredResult<>();
-		
-		Thread thread = new Thread(new FotoStorageRunnable(files, resultado,fotoStorage));
+		DeferredResult<FotoDTO> resultado = new DeferredResult<>();
+
+		Thread thread = new Thread(new FotoStorageRunnable(files, resultado, fotoStorage));
 		thread.start();
-		
+
 		return resultado;
 	}
+
+	@GetMapping("/temp/{nome:.*}")
+	public byte[] recuperarFotoTemporaria(@PathVariable String nome) {
+		return fotoStorage.recuperarFotoTemporario(nome);
+	}
+
 }
